@@ -1,27 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, Button, Image, Alert } from "react-native";
-import { useRoute } from "@react-navigation/native";
-import * as Print from "expo-print";
-import * as Sharing from "expo-sharing";
-import * as FileSystem from "expo-file-system";
-
-import { StepThreeRouteProp } from "./types";
-
-// Функция за почистване на името на файла от специални символи
-const sanitizeFileName = (name: string) => {
-  // Замяна на специални символи с тирета
-  return name.replace(/[^a-zA-Z0-9]/g, "_");
-};
-
-const StepThree = () => {
-  const route = useRoute<StepThreeRouteProp>();
-  const { name, date, signature } = route.params;
-
-  // Функция за създаване на PDF и споделяне
-  const createPDF = async () => {
-    try {
-      // Създаване на HTML съдържание за PDF
-      const htmlContent = `
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -51,6 +28,7 @@ const StepThree = () => {
         section {
             background: white;
             min-height: 100vh;
+            margin: 0 500px;
             padding: 100px;
             display: flex;
             flex-direction: column;
@@ -69,19 +47,19 @@ const StepThree = () => {
         </div>
         <div class="flex justify-between">
             <u>Thomas Geibel, Im Boden 23, 65795 Hattersheim</u>
-            <h2>Mannheim, ${date}</h2>
+            <h2>Mannheim, {{DATE}}</h2>
         </div>
         <p>Training</p>
         <p>Sehr geehrtes Amazon-Team,</p>
-        <p>Hiermit bestätigen wir, dass der Zusteller ${name} das Fahrer-Training entsprechend der Amazonvorgaben
+        <p>Hiermit bestätigen wir, dass der Zusteller {{NAME}} das Fahrer-Training entsprechend der Amazonvorgaben
             erhalten hat.</p>
         <p>Mit freundlichen Grüßen</p>
-        <img src="${signature}" alt="Signature" style="width: 200px; height: 100px;" />
+        <img src="{{SIGNATURE}}" alt="Signature" style="width: 200px; height: 100px;" />
         <div class="flex justify-between">
             <p>Trainingsveranstalter Druckschrift </p>
             <p>Training erhalten</p>
         </div>
-        <img src="${signature}" alt="Signature" style="width: 200px; height: 100px;" />
+        <img src="{{SIGNATURE}}" alt="Signature" style="width: 200px; height: 100px;" />
         <p>Trainingsveranstalter Unterschrift</p>
     </section>
 
@@ -156,13 +134,13 @@ const StepThree = () => {
         <div class="flex justify-between pt-3">
             <div class="text-center">
                 <div class="flex">
-                    <p>${date}</p>
-                    <img src="${signature}" alt="Signature" style="width: 200px; height: 100px;" />
+                    <p>{{DATUM}}</p>
+                    <img src="{{SIGNATURE}}" alt="Signature" style="width: 200px; height: 100px;" />
                 </div>
                 <p>Datum, Unterschrift Mitarbeiter</p>
             </div>
             <div class="text-center">
-                <img src="${signature}" alt="Signature" style="width: 200px; height: 100px;" />
+                <img src="{{SIGNATURE}}" alt="Signature" style="width: 200px; height: 100px;" />
                 <p>Name in Druckschrift</p>
             </div>
         </div>
@@ -257,13 +235,13 @@ const StepThree = () => {
         <div class="flex text-blue-400 justify-between pt-3">
             <div class="flex">
                 <p>Datum:</p>
-                <p>${date}</p>
+                <p>{{DATUM}}</p>
             </div>
             <div class="flex">
                 <p>DSP Name und Firma: Zhivko Ivanov Kleintransporte </p>
             </div>
             <div class="flex">
-                <p>Unterschrift</p> <img src="${signature}" alt="Signature" style="width: 200px; height: 100px;" />
+                <p>Unterschrift</p> <img src="{{SIGNATURE}}" alt="Signature" style="width: 200px; height: 100px;" />
             </div>
         </div>
     </section>
@@ -799,14 +777,14 @@ const StepThree = () => {
         <div>
             <div class="flex gap-6">
                 <p>Name:</p>
-                <p>${name}</p>
+                <p>{{NAME}}</p>
             </div>
             <div class="flex gap-6 my-[20px]">
-                <p>Unterschrift:</p><img src="${signature}" alt="Signature" style="width: 200px; height: 100px;" />
+                <p>Unterschrift:</p><img src="{{SIGNATURE}}" alt="Signature" style="width: 200px; height: 100px;" />
             </div>
             <div class="flex gap-6">
                 <p>Datum:</p>
-                <p>${date}</p>
+                <p>{{DATE}}</p>
             </div>
         </div>
 
@@ -871,13 +849,13 @@ const StepThree = () => {
         <div class="flex justify-between pt-3">
             <div class="text-center">
                 <div class="flex">
-                    <p>${date}</p>
-                    <img src="${signature}" alt="Signature" style="width: 200px; height: 100px;" />
+                    <p>{{DATUM}}</p>
+                    <img src="{{SIGNATURE}}" alt="Signature" style="width: 200px; height: 100px;" />
                 </div>
                 <p>Datum, Unterschrift Mitarbeiter</p>
             </div>
             <div class="text-center">
-                <img src="${signature}" alt="Signature" style="width: 200px; height: 100px;" />
+                <img src="{{SIGNATURE}}" alt="Signature" style="width: 200px; height: 100px;" />
                 <p>Name in Druckschrift</p>
             </div>
         </div>
@@ -942,15 +920,15 @@ const StepThree = () => {
         <div class=" flex flex-col gap-3">
             <div class="flex gap-6">
                 <p>Datum, Ort</p>
-                <p>${date}</p>
+                <p>{{DATE}}</p>
             </div>
             <div class="flex gap-6">
                 <p>Unterschrift</p>
-                <img src="${signature}" alt="Signature" style="width: 200px; height: 100px;" />
+                <img src="{{SIGNATURE}}" alt="Signature" style="width: 200px; height: 100px;" />
             </div>
             <div class="flex gap-6">
                 <p>Name (Druckschrift)</p>
-                <p>${name}</p>
+                <p>{{NAME}}</p>
             </div>
         </div>
 
@@ -1003,15 +981,15 @@ const StepThree = () => {
         <div class=" flex flex-col gap-3">
             <div class="flex gap-6">
                 <p>Name</p>
-                <p>${name}</p>
+                <p>{{NAME}}</p>
             </div>
             <div class="flex gap-6">
                 <p>Unterschrift</p>
-                <img src="${signature}" alt="Signature" style="width: 200px; height: 100px;" />
+                <img src="{{SIGNATURE}}" alt="Signature" style="width: 200px; height: 100px;" />
             </div>
             <div class="flex gap-6">
                 <p>Datum, Ort</p>
-                <p>${date}</p>
+                <p>{{DATE}}</p>
             </div>
         </div>
 
@@ -1050,15 +1028,15 @@ const StepThree = () => {
         <div class=" flex flex-col gap-3"></div>
         <div class="flex gap-6">
             <p>Name</p>
-            <p>${name}</p>
+            <p>{{NAME}}</p>
         </div>
         <div class="flex gap-6">
             <p>Unterschrift</p>
-            <img src="${signature}" alt="Signature" style="width: 200px; height: 100px;" />
+            <img src="{{SIGNATURE}}" alt="Signature" style="width: 200px; height: 100px;" />
         </div>
         <div class="flex gap-6">
             <p>Datum, Ort</p>
-            <p>${date}</p>
+            <p>{{DATE}}</p>
         </div>
         </div>
 
@@ -1086,52 +1064,3 @@ const StepThree = () => {
 </body>
 
 </html>
-      `;
-
-      // Създаване на PDF файл
-      const { uri } = await Print.printToFileAsync({ html: htmlContent });
-
-      // Определяне на име на файла с името на служителя
-      const sanitizedFileName = sanitizeFileName(name);
-      const fileName = `employee_contract_${sanitizedFileName}.pdf`;
-
-      // Споделяне на файла
-      if (await Sharing.isAvailableAsync()) {
-        await Sharing.shareAsync(uri, {
-          mimeType: "application/pdf",
-          dialogTitle: `Share ${fileName}`, // Показва заглавие при споделяне
-          UTI: "com.adobe.pdf",
-        });
-      } else {
-        Alert.alert("Sharing not available", "Unable to share the file.");
-      }
-    } catch (error) {
-      console.error("Error generating PDF:", error);
-      Alert.alert("Error", "Failed to generate PDF.");
-    }
-  };
-
-  return (
-    <View className="flex-1 p-4 bg-white">
-      <Text className="text-2xl font-bold mb-4">Review Details</Text>
-
-      <Text className="text-lg mb-2">Name: {name}</Text>
-      <Text className="text-lg mb-4">Date: {date}</Text>
-
-      <Text className="text-lg font-bold mb-4">Signature:</Text>
-      {signature ? (
-        <Image
-          source={{ uri: signature }}
-          className="h-40 w-full border border-gray-300"
-          resizeMode="contain"
-        />
-      ) : (
-        <Text>No signature available</Text>
-      )}
-
-      <Button title="Generate PDF" onPress={createPDF} color="#4CAF50" />
-    </View>
-  );
-};
-
-export default StepThree;
