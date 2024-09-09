@@ -4,8 +4,8 @@ import { StackNavigationProp } from '@react-navigation/stack';
 // Дефинирай типове за всеки екран
 type RootStackParamList = {
   StepOne: undefined;
-  StepTwo: { name: string; date: string };
-  StepThree: { name: string; date: string; signature: string | null };
+  StepTwo: { name: string; date: string; address: string };
+  StepThree: { name: string; date: string; address: string; signature: string | null };
 };
 
 // Типизация за навигацията

@@ -16,10 +16,11 @@ const StepTwo = () => {
   };
 
   const handleNext = () => {
-    // Навигирай към StepThree с параметри, типизирани правилно
+    // Навигирай към StepThree с параметрите name, date, address и signature
     navigation.navigate("StepThree", {
       name: route.params.name,
       date: route.params.date,
+      address: route.params.address, // Добавяме и адреса
       signature,
     });
   };
@@ -75,8 +76,6 @@ const StepTwo = () => {
       </View>
     </View>
   );
-  
-  
 };
 
 export default StepTwo;

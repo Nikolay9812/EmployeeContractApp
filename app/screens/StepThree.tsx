@@ -15,7 +15,7 @@ const sanitizeFileName = (name: string) => {
 
 const StepThree = () => {
   const route = useRoute<StepThreeRouteProp>();
-  const { name, date, signature } = route.params;
+  const { name, date, address, signature } = route.params;
 
   // Функция за създаване на PDF и споделяне
   const createPDF = async () => {
@@ -38,6 +38,17 @@ const StepThree = () => {
             gap: 20px;
         }
 
+            li{
+            margin-bottom: 10px;
+        }
+
+        .photo {
+        max-width: 100%; /* Мащабира изображението спрямо ширината на страницата */
+        max-height: 900px; /* Гарантира, че изображението няма да надвиши страницата по височина */
+        display: block;
+        margin: 0 auto;
+      }
+
         tbody tr:nth-child(odd) {
             background-color: #97bade;
             /* Светлосиво */
@@ -49,18 +60,75 @@ const StepThree = () => {
         }
 
         section {
-            background: white;
-            min-height: 100vh;
-            padding: 100px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
+    background: white;
+    min-height: 900px; /* Избягване на 100vh */
+    padding: 0 100px;
+    display: block; /* Избягване на flexbox */
+    page-break-after: always; /* Гарантиране, че секцията ще се разделя на нова страница */
+}
     </style>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-gray-500">
+        <section class="gap-3">
+        <h1 class="text-center"><b><u>SICHERHEITSBELEHRUNG FUR MITARBEITER</u></b></h1>
+        <b>Firma Geibel-Transport-GmbH</b>
+        <b>Mit Vertragsunterzeichnung wurde ich heute iiber folgende Punkte belehrt:</b>
+        <ul class="list-decimal pl-[20px]">
+            <li>Die Sendungen (mit Ausnahme von Sendungen ,ohne Quittung") diirfen nur gegen eine persénliche
+                Unterschrift des Empfangers oder gegen Unterschrift eines Ersatzempfangers ausgeliefert werden. Es darf
+                nicht ,,im Auftrag des Kunden unterschrieben werden.</li>
+            <li>Das Erfassen von Daten in der Amazon Flex App entspricht der Beschriftung von Urkunden.und genie@8t
+                den Schutz des § 267 Strafgesetzbuch (Urkundenfalschung). Das so genannte ,Unterschreiben mit dem
+                Namen des Kunden” ist - UNTERSCHRIFTENFALSCHUNG -. Die Falschung der Unterschriften (sowohl von
+                Kunden, als auch von anderen Personen) und jede weitere Manipulation der Unterlagen bzw. bei der
+                Datenerfassung, wie z.B. Eingabe von erfundenen Sendungsnummern und Phantasienamen, erfillen die
+                Tatbestande des § 263 StGB (Betrug) bzw. § 267 StGB (Urkundenfalschung) und ziehen grundsatzlich
+                arbeitsrechtliche Schritte nach sich, die bis zur Beendigung des Arbeitsverhaltnisses reichen kénnen.
+                Die
+                Firma Geibel- Transport-GmbH behalt sich die Regressnahme und die Einleitung der strafrechtlichen ©
+                Verfolgung vor.</li>
+            <li>Wahrend der Fahrt sind die Tiiren des Laderraumes — und beim Verlassen des Fahrzeuges alles Turen —
+                ausnahmslos abzuschlieBen.</li>
+            <li>Zum sicheren Fiihren des Fahrzeuges muss den FuB umschlieBendes Schuhwerk getragen werden. Nicht
+                geeignet sind z.B, Sandaletten oder Holzpantinen (BGV D 29, § 44).</li>
+            <li>Jeder Verlust der Fahrerlaubnis bzw. ein Fahrverbot ist sofort dem Vorgesetzten bekannt zu geben.</li>
+            <li>Die Einhaltungen der Arbeitszeiten/Lenkzeiten und der gesetzlich vorgeschriebenen Pausen ist zu
+                beachten.
+                Die Brandschutzordnung des Betriebes ist mit bekannt, Uber das Verhalten im Brandfall wurde ich belehrt.
+                Notausgange und Feuerléscher diirfen nicht verstellt werden.</li>
+            <li>Uber den Umgang mit Gefahrgut und Gefahrstoffen wurde ich geschult. Die Vorschriften zum Umgang mit
+                Gefahrgutsendungen aus der Gefahrgutverordnung StraBe sind mir bekannt.</li>
+            <li>Die Ladung auf dem Zustellfahrzeug ist jederzeit ordnungsgemaé zu sichern.</li>
+            <li>Die Betriebsanweisungen sind mir bekannt, soweit sie meine Tatigkeit im Betrieb betreffen.
+                Das Fahrerhandbuch wurde mir tibergeben und ist mir inhaltlich bekannt.</li>
+            <li>Die Warnweste und die Sicherheitsschuhe sind gemaB der Vertragsvereinbarung zu Tragen.
+                Das Zustellerbatch fiir ist wahrend der gesamten Arbeitszeit zu Tragen.</li>
+            <li>Uber die arbeitssicherheits- und arbeitsmedizinische Organisation am Arbeitsplatz wurde ich informiert.
+                Die
+                arbeitsmedizinischen Informationen Uber meinen Arbeitsplatz sind bekannt.</li>
+            <li>Die Inhalte des ,Allgemeinen Gleichbehandiungsgesetzes (AGG) sind mir bekannt. Niemand darf aufgrund
+                seiner Rasse und ethnischer Herkunft, Religion und Weltanschauung, einer Behinderung, Geschlechts,
+                sexueller Orientierung oder seines Alters diskriminiert, beleidigt oder belastigt werden.</li>
+            <li>Mir ist bekannt , dass ich gem&B § 2a Abs. 1 SchwarzArbG verpflichtet bin, wahrend meiner Tatigkeit fir
+                oben genannte Firma einen Personalausweis, Pass, Passersatz oder Ausweisersatz mitzuftihren habe um
+                diesen auf Verlangen den Zollbehérde vorzulegen.</li>
+        </ul>
+        <b>Die oben aufgefiihrte Sicherheitsbelehrung habe ich verstanden und zur Kenntnis
+            genommen.</b>
+            <div class="flex gap-6 pt-3">
+                <div class="flex gap-3">
+                        <p>Datum:</p>
+                        <p>${date}</p>
+                </div>
+                <div class="flex gap-3">
+                    <p>Unterschrift:</p>
+                    <img src="${signature}" alt="Signature" style="width: 200px; height: 100px;" />
+                </div>
+            </div>
+    </section>
+
     <section class="page-break">
         <h1 class="text-center font-bold text-xl">KURIER- UND PAKETDIENST</h1>
         <div>
@@ -96,59 +164,60 @@ const StepThree = () => {
         <h1 class="text-center text-2xl font-extrabold my-[30px]"><u>Arbeitsanweisung für Fahrer </u><br>
             zur Einhaltung der Betriebs- und Verkehrssicherheit des <br>
             von ihm geführten Fahrzeuges </h1>
-        <div class="m-[50px] flex flex-col gap-2">
-            <p><b>•</b> Vor Beginn der Fahrt ist das Fahrzeug vom Fahrer auf <b>Betriebs- und
+        <ul class="list-disc pl-[20px]">
+            <li> Vor Beginn der Fahrt ist das Fahrzeug vom Fahrer auf <b>Betriebs- und
 
-                    Verkehrssicherheit</b> zu überprüfen.</p>
+                    Verkehrssicherheit</b> zu überprüfen.</li>
 
-            <p><b>•</b> Hierzu gehören insbesondere die Kontrolle von:</p>
-            <ul class="ml-[20px]">
-                <li>&ndash; Kühlflüssigkeit</li>
-                <li>&ndash; Motoröl</li>
-                <li>&ndash; Reifendruck, Profiltiefe, Beschädigungen</li>
-                <li>&ndash; Bremsen</li>
-                <li>&ndash; Lichtanlage</li>
-                <li>&ndash; Ladungssicherung</li>
-                <li>&ndash; Unfallschäden und sonstige Beschädigungen an der Karosserie</li>
-                <li>&ndash; Sonstige Mängel</li>
-            </ul>
-            <p><b>•</b> Festgestellte Mängel, die nicht vom Fahrer direkt behoben werden können, sind
+            <li> Hierzu gehören insbesondere die Kontrolle von:
+                <ul class="ml-[20px]">
+                    <li>&ndash; Kühlflüssigkeit</li>
+                    <li>&ndash; Motoröl</li>
+                    <li>&ndash; Reifendruck, Profiltiefe, Beschädigungen</li>
+                    <li>&ndash; Bremsen</li>
+                    <li>&ndash; Lichtanlage</li>
+                    <li>&ndash; Ladungssicherung</li>
+                    <li>&ndash; Unfallschäden und sonstige Beschädigungen an der Karosserie</li>
+                    <li>&ndash; Sonstige Mängel</li>
+                </ul>
+            </li>
+            <li> Festgestellte Mängel, die nicht vom Fahrer direkt behoben werden können, sind
 
-                unverzüglich dem Fuhrparkverantwortlichen zu melden.</p>
+                unverzüglich dem Fuhrparkverantwortlichen zu melden.</li>
 
-            <p><b>• Betriebs- und verkehrsunsichere Fahrzeuge dürfen keinesfalls am
+            <li><b>Betriebs- und verkehrsunsichere Fahrzeuge dürfen keinesfalls am
 
-                    Straßenverkehr teilnehmen!</b></p>
+                    Straßenverkehr teilnehmen!</b></li>
 
-            <p><b>•</b> Die Vorschriften der StVO sind einzuhalten. Insbesondere sind die vorgeschriebenen
+            <li>Die Vorschriften der StVO sind einzuhalten. Insbesondere sind die vorgeschriebenen
 
                 Höchstgeschwindigkeiten nicht zu überschreiten. Die Fahrweise ist den
-                Witterungsverhältnissen anzupassen. </p>
+                Witterungsverhältnissen anzupassen. </li>
 
-            <p><b>•</b> Der Verlust des Führerscheines bzw. ein Fahrverbot ist dem Vorgesetzen sofort
+            <li> Der Verlust des Führerscheines bzw. ein Fahrverbot ist dem Vorgesetzen sofort
 
-                anzuzeigen.</p>
+                anzuzeigen.</li>
 
-            <p><b>•</b> Die Einhaltung des Arbeitszeitgesetzes und bei Fahrzeugen mit einem zulässigen
+            <li> Die Einhaltung des Arbeitszeitgesetzes und bei Fahrzeugen mit einem zulässigen
 
                 Gesamtgewicht > 2,8 t die Einhaltung der Lenkzeitverordnung ist sicherzustellen. Die
-                gesetzlich vorgeschriebenen Pausen sind einzuhalten. </p>
+                gesetzlich vorgeschriebenen Pausen sind einzuhalten. </li>
 
-            <p><b>• Bei einer Panne</b> ist die Warnweste anzulegen und das Fahrzeug vorschriftsmäßig
+            <li><b>Bei einer Panne</b> ist die Warnweste anzulegen und das Fahrzeug vorschriftsmäßig
 
-                abzusichern. </p>
+                abzusichern. </li>
 
-            <p><b>•</b> Lässt sich die Panne nicht selbst beheben, ist der Fuhrparkverantwortliche
+            <li> Lässt sich die Panne nicht selbst beheben, ist der Fuhrparkverantwortliche
 
-                unverzüglich zu informieren.</p>
+                unverzüglich zu informieren.</li>
 
-            <p><b>•</b> Beschädigungen am Fahrzeug, gleich welchen Ausmaßes, sind bei Rückkehr von
+            <li> Beschädigungen am Fahrzeug, gleich welchen Ausmaßes, sind bei Rückkehr von
 
-                Tour dem Fuhrparkverantwortlichen zu melden.</p>
+                Tour dem Fuhrparkverantwortlichen zu melden.</li>
 
-            <p><b>•</b> Bußgelder, Verwarnungen mit Verwarnungsgeld sowie Strafmandate werden dem
-            </p>
-        </div>
+            <li> Bußgelder, Verwarnungen mit Verwarnungsgeld sowie Strafmandate werden dem
+            </li>
+        </ul>
 
         <p>Die Arbeitsanweisung ist Bestandteil des Arbeitsvertrages. Ich habe die Arbeitsanweisung
             erhalten und verstanden
@@ -236,7 +305,7 @@ const StepThree = () => {
             </div>
             </div>
             <li>Alle Sendungen sind von Amazon entsprechend gelabelt: </li>
-            <img src="Screenshot (163).png" alt="Screenshot">
+            <img class='photo' src="https://firebasestorage.googleapis.com/v0/b/mern-blog-68008.appspot.com/o/Screenshot%20(163).png?alt=media&token=f47068a1-7d26-4b5f-bb18-f3c8b5afccd4" alt="Screenshot">
             <li>Als DSP sind Sie verantwortlich für Ladungssicherheit und den korrekten Transport der Sendungen und
                 versichern, dass Sie ihre Fahrer (einschließlich etwaige Unterauftragnehmer) entsprechend trainieren.
             </li>
@@ -272,13 +341,13 @@ const StepThree = () => {
         <p class="text-blue-400">Informationsblatt:</p>
         <h1 class="underline my-[30px] text-2xl font-extrabold text-orange-500 text-center">Beschädigte Pakete:<br>
             Verhalten bei auslaufenden Flüssigkeiten</h1>
-        <img src="Screenshot (165).png" alt="Screenshot">
-        <img src="Screenshot (166).png" alt="Screenshot">
+        <img class='photo' src="https://firebasestorage.googleapis.com/v0/b/mern-blog-68008.appspot.com/o/Screenshot%20(165).png?alt=media&token=8403aafd-5ebf-4601-b706-30a1c08626bc" alt="Screenshot">
+        <img class='photo' src="https://firebasestorage.googleapis.com/v0/b/mern-blog-68008.appspot.com/o/Screenshot%20(166).png?alt=media&token=961cd076-df0b-404e-9c7f-61f56f98e340" alt="Screenshot">
     </section>
 
     <section class="justify-normal page-break">
         <p class="text-blue-400">Hinweisblatt: </p>
-        <img src="Screenshot (167).png" class="rotate-[-90deg] my-[200px]" alt="Screenshot">
+        <img class='photo' src="https://firebasestorage.googleapis.com/v0/b/mern-blog-68008.appspot.com/o/Screenshot%20(167).png?alt=media&token=b1fe2b7b-9229-46b8-b562-8cabe6599054" class="rotate-[-90deg] my-[200px]" alt="Screenshot">
     </section>
 
     <section class="gap-3 page-break">
@@ -943,6 +1012,7 @@ const StepThree = () => {
             <div class="flex gap-6">
                 <p>Datum, Ort</p>
                 <p>${date}</p>
+                <p>${address}</p>
             </div>
             <div class="flex gap-6">
                 <p>Unterschrift</p>
@@ -1012,6 +1082,7 @@ const StepThree = () => {
             <div class="flex gap-6">
                 <p>Datum, Ort</p>
                 <p>${date}</p>
+                <p>${address}</p>
             </div>
         </div>
 
@@ -1059,6 +1130,7 @@ const StepThree = () => {
         <div class="flex gap-6">
             <p>Datum, Ort</p>
             <p>${date}</p>
+            <p>${address}</p>
         </div>
         </div>
 
@@ -1116,7 +1188,8 @@ const StepThree = () => {
       <Text className="text-2xl font-bold mb-4">Review Details</Text>
 
       <Text className="text-lg mb-2">Name: {name}</Text>
-      <Text className="text-lg mb-4">Date: {date}</Text>
+          <Text className="text-lg mb-4">Date: {date}</Text>
+      <Text className="text-lg mb-4">Address: {address}</Text>
 
       <Text className="text-lg font-bold mb-4">Signature:</Text>
       {signature ? (
