@@ -1,107 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
+// Contract.tsx - Общ HTML шаблон
+export const contractTemplate = `
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contract</title>
-    <link rel="stylesheet" href="/main.css">
     <style>
-        body {
-            line-height: 1.6;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        tbody tr:nth-child(odd) {
-            background-color: #97bade;
-            /* Светлосиво */
-        }
-
-        tbody tr:nth-child(even) {
-            background-color: #e0f2fe;
-            /* Светлосиньо */
-        }
-
-        section {
-            background: white;
-            min-height: 100vh;
-            margin: 0 500px;
-            padding: 100px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        li{
-            margin-bottom: 10px;
-        }
+      body {
+        line-height: 1.6;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      li {
+        margin-bottom: 10px;
+      }
+      .photo {
+        max-width: 100%;
+        max-height: 900px;
+        display: block;
+        margin: 0 auto;
+      }
+      tbody tr:nth-child(odd) {
+        background-color: #97bade;
+      }
+      tbody tr:nth-child(even) {
+        background-color: #e0f2fe;
+      }
+      section {
+        background: white;
+        min-height: 900px;
+        padding: 0 100px;
+        display: block;
+        page-break-after: always;
+      }
     </style>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
+  </head>
+  <body>
+    {{sections}}
+  </body>
+  </html>
+`;
 
-<body class="bg-gray-500">
-    <section class="gap-3">
-        <h1 class="text-center"><b><u>SICHERHEITSBELEHRUNG FUR MITARBEITER</u></b></h1>
-        <b>Firma Geibel-Transport-GmbH</b>
-        <b>Mit Vertragsunterzeichnung wurde ich heute iiber folgende Punkte belehrt:</b>
-        <ul class="list-decimal pl-[20px]">
-            <li>Die Sendungen (mit Ausnahme von Sendungen ,ohne Quittung") diirfen nur gegen eine persénliche
-                Unterschrift des Empfangers oder gegen Unterschrift eines Ersatzempfangers ausgeliefert werden. Es darf
-                nicht ,,im Auftrag des Kunden unterschrieben werden.</li>
-            <li>Das Erfassen von Daten in der Amazon Flex App entspricht der Beschriftung von Urkunden.und genie@8t
-                den Schutz des § 267 Strafgesetzbuch (Urkundenfalschung). Das so genannte ,Unterschreiben mit dem
-                Namen des Kunden” ist - UNTERSCHRIFTENFALSCHUNG -. Die Falschung der Unterschriften (sowohl von
-                Kunden, als auch von anderen Personen) und jede weitere Manipulation der Unterlagen bzw. bei der
-                Datenerfassung, wie z.B. Eingabe von erfundenen Sendungsnummern und Phantasienamen, erfillen die
-                Tatbestande des § 263 StGB (Betrug) bzw. § 267 StGB (Urkundenfalschung) und ziehen grundsatzlich
-                arbeitsrechtliche Schritte nach sich, die bis zur Beendigung des Arbeitsverhaltnisses reichen kénnen.
-                Die
-                Firma Geibel- Transport-GmbH behalt sich die Regressnahme und die Einleitung der strafrechtlichen ©
-                Verfolgung vor.</li>
-            <li>Wahrend der Fahrt sind die Tiiren des Laderraumes — und beim Verlassen des Fahrzeuges alles Turen —
-                ausnahmslos abzuschlieBen.</li>
-            <li>Zum sicheren Fiihren des Fahrzeuges muss den FuB umschlieBendes Schuhwerk getragen werden. Nicht
-                geeignet sind z.B, Sandaletten oder Holzpantinen (BGV D 29, § 44).</li>
-            <li>Jeder Verlust der Fahrerlaubnis bzw. ein Fahrverbot ist sofort dem Vorgesetzten bekannt zu geben.</li>
-            <li>Die Einhaltungen der Arbeitszeiten/Lenkzeiten und der gesetzlich vorgeschriebenen Pausen ist zu
-                beachten.
-                Die Brandschutzordnung des Betriebes ist mit bekannt, Uber das Verhalten im Brandfall wurde ich belehrt.
-                Notausgange und Feuerléscher diirfen nicht verstellt werden.</li>
-            <li>Uber den Umgang mit Gefahrgut und Gefahrstoffen wurde ich geschult. Die Vorschriften zum Umgang mit
-                Gefahrgutsendungen aus der Gefahrgutverordnung StraBe sind mir bekannt.</li>
-            <li>Die Ladung auf dem Zustellfahrzeug ist jederzeit ordnungsgemaé zu sichern.</li>
-            <li>Die Betriebsanweisungen sind mir bekannt, soweit sie meine Tatigkeit im Betrieb betreffen.
-                Das Fahrerhandbuch wurde mir tibergeben und ist mir inhaltlich bekannt.</li>
-            <li>Die Warnweste und die Sicherheitsschuhe sind gemaB der Vertragsvereinbarung zu Tragen.
-                Das Zustellerbatch fiir ist wahrend der gesamten Arbeitszeit zu Tragen.</li>
-            <li>Uber die arbeitssicherheits- und arbeitsmedizinische Organisation am Arbeitsplatz wurde ich informiert.
-                Die
-                arbeitsmedizinischen Informationen Uber meinen Arbeitsplatz sind bekannt.</li>
-            <li>Die Inhalte des ,Allgemeinen Gleichbehandiungsgesetzes (AGG) sind mir bekannt. Niemand darf aufgrund
-                seiner Rasse und ethnischer Herkunft, Religion und Weltanschauung, einer Behinderung, Geschlechts,
-                sexueller Orientierung oder seines Alters diskriminiert, beleidigt oder belastigt werden.</li>
-            <li>Mir ist bekannt , dass ich gem&B § 2a Abs. 1 SchwarzArbG verpflichtet bin, wahrend meiner Tatigkeit fir
-                oben genannte Firma einen Personalausweis, Pass, Passersatz oder Ausweisersatz mitzuftihren habe um
-                diesen auf Verlangen den Zollbehérde vorzulegen.</li>
-        </ul>
-        <b>Die oben aufgefiihrte Sicherheitsbelehrung habe ich verstanden und zur Kenntnis
-            genommen.</b>
-            <div class="flex gap-6 pt-3">
-                <div class="flex gap-3">
-                        <p>Datum:</p>
-                        <p>{{DATUM}}</p>
-                </div>
-                <div class="flex gap-3">
-                    <p>Unterschrift:</p>
-                    <img src="{{SIGNATURE}}" alt="Signature" style="width: 200px; height: 100px;" />
-                </div>
-            </div>
-    </section>
-
-    <section class="page-break">
+// Шаблони за секции
+export const contractSections = [
+  {
+    title: "Training Amazon DHE1",
+    content: `
+      <section class="page-break">
         <h1 class="text-center font-bold text-xl">KURIER- UND PAKETDIENST</h1>
         <div>
             <h3>Geibel-Transport-GmbH@web.de</h3>
@@ -109,23 +57,26 @@
         </div>
         <div class="flex justify-between">
             <u>Thomas Geibel, Im Boden 23, 65795 Hattersheim</u>
-            <h2>Mannheim, {{DATE}}</h2>
+            <h2>Mannheim, {{date}}</h2>
         </div>
         <p>Training</p>
         <p>Sehr geehrtes Amazon-Team,</p>
-        <p>Hiermit bestätigen wir, dass der Zusteller {{NAME}} das Fahrer-Training entsprechend der Amazonvorgaben
+        <p>Hiermit bestätigen wir, dass der Zusteller {{name}} das Fahrer-Training entsprechend der Amazonvorgaben
             erhalten hat.</p>
         <p>Mit freundlichen Grüßen</p>
-        <img src="{{SIGNATURE}}" alt="Signature" style="width: 200px; height: 100px;" />
+        <img src="{{signature}}" alt="Signature" style="width: 200px; height: 100px;" />
         <div class="flex justify-between">
             <p>Trainingsveranstalter Druckschrift </p>
             <p>Training erhalten</p>
         </div>
-        <img src="{{SIGNATURE}}" alt="Signature" style="width: 200px; height: 100px;" />
+        <img src="{{signature}}" alt="Signature" style="width: 200px; height: 100px;" />
         <p>Trainingsveranstalter Unterschrift</p>
     </section>
-
-    <section class="page-break gap-3">
+    `,
+  },
+  {
+    title: "Arbeitsanweisung StVo Betriebssicherheit Zhivko ivanov",
+    content: `<section class="page-break gap-3">
         <div class="w-full">
             <div class="h-[2px] bg-black"></div>
             <h1 class="text-center my-[30px] text-xl font-bold">KURIER- UND PAKETDIENST<br>
@@ -197,19 +148,21 @@
         <div class="flex justify-between pt-3">
             <div class="text-center">
                 <div class="flex">
-                    <p>{{DATUM}}</p>
-                    <img src="{{SIGNATURE}}" alt="Signature" style="width: 200px; height: 100px;" />
+                    <p>{{date}}</p>
+                    <img src="{{signature}}" alt="Signature" style="width: 200px; height: 100px;" />
                 </div>
                 <p>Datum, Unterschrift Mitarbeiter</p>
             </div>
             <div class="text-center">
-                <img src="{{SIGNATURE}}" alt="Signature" style="width: 200px; height: 100px;" />
+                <img src="{{signature}}" alt="Signature" style="width: 200px; height: 100px;" />
                 <p>Name in Druckschrift</p>
             </div>
         </div>
-    </section>
-
-    <section class="page-break gap-3">
+    </section>`,
+  },
+  {
+    title: "Merkblatt_für_DSPs_Hazmat_20181108",
+    content: `<section class="page-break gap-3">
         <h1 class="text-blue-400 text-xl">Merkblatt für Delivery Service Provider (DSPs) bzgl. Gefahrgut in begrenzten
             Mengen: </h1>
         <ul class="m-[50px] flex flex-col gap-2 list-decimal">
@@ -277,7 +230,8 @@
             </div>
             </div>
             <li>Alle Sendungen sind von Amazon entsprechend gelabelt: </li>
-            <img src="https://firebasestorage.googleapis.com/v0/b/mern-blog-68008.appspot.com/o/Screenshot%20(163).png?alt=media&token=f47068a1-7d26-4b5f-bb18-f3c8b5afccd4"
+            <img class='photo'
+                src="https://firebasestorage.googleapis.com/v0/b/mern-blog-68008.appspot.com/o/Screenshot%20(163).png?alt=media&token=f47068a1-7d26-4b5f-bb18-f3c8b5afccd4"
                 alt="Screenshot">
             <li>Als DSP sind Sie verantwortlich für Ladungssicherheit und den korrekten Transport der Sendungen und
                 versichern, dass Sie ihre Fahrer (einschließlich etwaige Unterauftragnehmer) entsprechend trainieren.
@@ -299,13 +253,13 @@
         <div class="flex text-blue-400 justify-between pt-3">
             <div class="flex">
                 <p>Datum:</p>
-                <p>{{DATUM}}</p>
+                <p>{{date}}</p>
             </div>
             <div class="flex">
                 <p>DSP Name und Firma: Zhivko Ivanov Kleintransporte </p>
             </div>
             <div class="flex">
-                <p>Unterschrift</p> <img src="{{SIGNATURE}}" alt="Signature" style="width: 200px; height: 100px;" />
+                <p>Unterschrift</p> <img src="{{signature}}" alt="Signature" style="width: 200px; height: 100px;" />
             </div>
         </div>
     </section>
@@ -314,19 +268,24 @@
         <p class="text-blue-400">Informationsblatt:</p>
         <h1 class="underline my-[30px] text-2xl font-extrabold text-orange-500 text-center">Beschädigte Pakete:<br>
             Verhalten bei auslaufenden Flüssigkeiten</h1>
-        <img src="https://firebasestorage.googleapis.com/v0/b/mern-blog-68008.appspot.com/o/Screenshot%20(165).png?alt=media&token=8403aafd-5ebf-4601-b706-30a1c08626bc"
+        <img class='photo'
+            src="https://firebasestorage.googleapis.com/v0/b/mern-blog-68008.appspot.com/o/Screenshot%20(165).png?alt=media&token=8403aafd-5ebf-4601-b706-30a1c08626bc"
             alt="Screenshot">
-        <img src="https://firebasestorage.googleapis.com/v0/b/mern-blog-68008.appspot.com/o/Screenshot%20(166).png?alt=media&token=961cd076-df0b-404e-9c7f-61f56f98e340"
+        <img class='photo'
+            src="https://firebasestorage.googleapis.com/v0/b/mern-blog-68008.appspot.com/o/Screenshot%20(166).png?alt=media&token=961cd076-df0b-404e-9c7f-61f56f98e340"
             alt="Screenshot">
     </section>
 
     <section class="justify-normal page-break">
         <p class="text-blue-400">Hinweisblatt: </p>
-        <img src="https://firebasestorage.googleapis.com/v0/b/mern-blog-68008.appspot.com/o/Screenshot%20(167).png?alt=media&token=b1fe2b7b-9229-46b8-b562-8cabe6599054"
+        <img class='photo'
+            src="https://firebasestorage.googleapis.com/v0/b/mern-blog-68008.appspot.com/o/Screenshot%20(167).png?alt=media&token=b1fe2b7b-9229-46b8-b562-8cabe6599054"
             class="rotate-[-90deg] my-[200px]" alt="Screenshot">
-    </section>
-
-    <section class="gap-3 page-break">
+    </section>`,
+  },
+  {
+    title: "6.1 AMZL Privacy",
+    content: `<section class="gap-3 page-break">
         <b>AMZL Privacy Notice für Lieferpartner</b>
 
         <p>
@@ -844,20 +803,22 @@
         <div>
             <div class="flex gap-6">
                 <p>Name:</p>
-                <p>{{NAME}}</p>
+                <p>{{name}}</p>
             </div>
             <div class="flex gap-6 my-[20px]">
-                <p>Unterschrift:</p><img src="{{SIGNATURE}}" alt="Signature" style="width: 200px; height: 100px;" />
+                <p>Unterschrift:</p><img src="{{signature}}" alt="Signature" style="width: 200px; height: 100px;" />
             </div>
             <div class="flex gap-6">
                 <p>Datum:</p>
-                <p>{{DATE}}</p>
+                <p>{{date}}</p>
             </div>
         </div>
 
-    </section>
-
-    <section class="page-break">
+    </section>`,
+  },
+  {
+    title: "Arbeitsanweisung StVo über 2,8 to Zhivko Ivanov",
+    content: ` <section class="page-break">
         <div class="w-full">
             <div class="h-[2px] bg-black"></div>
             <h1 class="text-center my-[30px] text-xl font-bold">KURIER- UND PAKETDIENST<br>
@@ -916,19 +877,21 @@
         <div class="flex justify-between pt-3">
             <div class="text-center">
                 <div class="flex">
-                    <p>{{DATUM}}</p>
-                    <img src="{{SIGNATURE}}" alt="Signature" style="width: 200px; height: 100px;" />
+                    <p>{{date}}</p>
+                    <img src="{{signature}}" alt="Signature" style="width: 200px; height: 100px;" />
                 </div>
                 <p>Datum, Unterschrift Mitarbeiter</p>
             </div>
             <div class="text-center">
-                <img src="{{SIGNATURE}}" alt="Signature" style="width: 200px; height: 100px;" />
+                <img src="{{signature}}" alt="Signature" style="width: 200px; height: 100px;" />
                 <p>Name in Druckschrift</p>
             </div>
         </div>
-    </section>
-
-    <section class="gap-3">
+    </section>`,
+  },
+  {
+    title: "AMZL_DE_Onboarding Document V 6SEP17-36-38",
+    content: `<section class="gap-3">
         <p>Grundlagen für eine erfolgreiche Zusammenarbeit</p>
         <h1 class="text-blue-500">9 APPENDIX A: ONBOARDING: NOTWENDIGE INFORMATIONEN UND DOKUMENTE</h1>
 
@@ -987,15 +950,16 @@
         <div class=" flex flex-col gap-3">
             <div class="flex gap-6">
                 <p>Datum, Ort</p>
-                <p>{{DATE}}</p>
+                <p>{{date}}</p>
+                <p>{{address}}</p>
             </div>
             <div class="flex gap-6">
                 <p>Unterschrift</p>
-                <img src="{{SIGNATURE}}" alt="Signature" style="width: 200px; height: 100px;" />
+                <img src="{{signature}}" alt="Signature" style="width: 200px; height: 100px;" />
             </div>
             <div class="flex gap-6">
                 <p>Name (Druckschrift)</p>
-                <p>{{NAME}}</p>
+                <p>{{name}}</p>
             </div>
         </div>
 
@@ -1048,15 +1012,16 @@
         <div class=" flex flex-col gap-3">
             <div class="flex gap-6">
                 <p>Name</p>
-                <p>{{NAME}}</p>
+                <p>{{name}}</p>
             </div>
             <div class="flex gap-6">
                 <p>Unterschrift</p>
-                <img src="{{SIGNATURE}}" alt="Signature" style="width: 200px; height: 100px;" />
+                <img src="{{signature}}" alt="Signature" style="width: 200px; height: 100px;" />
             </div>
             <div class="flex gap-6">
                 <p>Datum, Ort</p>
-                <p>{{DATE}}</p>
+                <p>{{date}}</p>
+                <p>{{address}}</p>
             </div>
         </div>
 
@@ -1095,15 +1060,16 @@
         <div class=" flex flex-col gap-3"></div>
         <div class="flex gap-6">
             <p>Name</p>
-            <p>{{NAME}}</p>
+            <p>{{name}}</p>
         </div>
         <div class="flex gap-6">
             <p>Unterschrift</p>
-            <img src="{{SIGNATURE}}" alt="Signature" style="width: 200px; height: 100px;" />
+            <img src="{{signature}}" alt="Signature" style="width: 200px; height: 100px;" />
         </div>
         <div class="flex gap-6">
             <p>Datum, Ort</p>
-            <p>{{DATE}}</p>
+            <p>{{date}}</p>
+            <p>{{address}}</p>
         </div>
         </div>
 
@@ -1127,7 +1093,67 @@
 
         <p class="text-center">Amazon.com Confidential </p>
 
-    </section>
-</body>
-
-</html>
+    </section>`,
+  },
+  {
+    title: "Sicherheitsbelehrung",
+    content: `<section class="gap-3">
+        <h1 class="text-center"><b><u>SICHERHEITSBELEHRUNG FUR MITARBEITER</u></b></h1>
+        <b>Firma Geibel-Transport-GmbH</b>
+        <b>Mit Vertragsunterzeichnung wurde ich heute iiber folgende Punkte belehrt:</b>
+        <ul class="list-decimal pl-[20px]">
+            <li>Die Sendungen (mit Ausnahme von Sendungen ,ohne Quittung") diirfen nur gegen eine persénliche
+                Unterschrift des Empfangers oder gegen Unterschrift eines Ersatzempfangers ausgeliefert werden. Es darf
+                nicht ,,im Auftrag des Kunden unterschrieben werden.</li>
+            <li>Das Erfassen von Daten in der Amazon Flex App entspricht der Beschriftung von Urkunden.und genie@8t
+                den Schutz des § 267 Strafgesetzbuch (Urkundenfalschung). Das so genannte ,Unterschreiben mit dem
+                Namen des Kunden” ist - UNTERSCHRIFTENFALSCHUNG -. Die Falschung der Unterschriften (sowohl von
+                Kunden, als auch von anderen Personen) und jede weitere Manipulation der Unterlagen bzw. bei der
+                Datenerfassung, wie z.B. Eingabe von erfundenen Sendungsnummern und Phantasienamen, erfillen die
+                Tatbestande des § 263 StGB (Betrug) bzw. § 267 StGB (Urkundenfalschung) und ziehen grundsatzlich
+                arbeitsrechtliche Schritte nach sich, die bis zur Beendigung des Arbeitsverhaltnisses reichen kénnen.
+                Die
+                Firma Geibel- Transport-GmbH behalt sich die Regressnahme und die Einleitung der strafrechtlichen ©
+                Verfolgung vor.</li>
+            <li>Wahrend der Fahrt sind die Tiiren des Laderraumes — und beim Verlassen des Fahrzeuges alles Turen —
+                ausnahmslos abzuschlieBen.</li>
+            <li>Zum sicheren Fiihren des Fahrzeuges muss den FuB umschlieBendes Schuhwerk getragen werden. Nicht
+                geeignet sind z.B, Sandaletten oder Holzpantinen (BGV D 29, § 44).</li>
+            <li>Jeder Verlust der Fahrerlaubnis bzw. ein Fahrverbot ist sofort dem Vorgesetzten bekannt zu geben.</li>
+            <li>Die Einhaltungen der Arbeitszeiten/Lenkzeiten und der gesetzlich vorgeschriebenen Pausen ist zu
+                beachten.
+                Die Brandschutzordnung des Betriebes ist mit bekannt, Uber das Verhalten im Brandfall wurde ich belehrt.
+                Notausgange und Feuerléscher diirfen nicht verstellt werden.</li>
+            <li>Uber den Umgang mit Gefahrgut und Gefahrstoffen wurde ich geschult. Die Vorschriften zum Umgang mit
+                Gefahrgutsendungen aus der Gefahrgutverordnung StraBe sind mir bekannt.</li>
+            <li>Die Ladung auf dem Zustellfahrzeug ist jederzeit ordnungsgemaé zu sichern.</li>
+            <li>Die Betriebsanweisungen sind mir bekannt, soweit sie meine Tatigkeit im Betrieb betreffen.
+                Das Fahrerhandbuch wurde mir tibergeben und ist mir inhaltlich bekannt.</li>
+            <li>Die Warnweste und die Sicherheitsschuhe sind gemaB der Vertragsvereinbarung zu Tragen.
+                Das Zustellerbatch fiir ist wahrend der gesamten Arbeitszeit zu Tragen.</li>
+            <li>Uber die arbeitssicherheits- und arbeitsmedizinische Organisation am Arbeitsplatz wurde ich informiert.
+                Die
+                arbeitsmedizinischen Informationen Uber meinen Arbeitsplatz sind bekannt.</li>
+            <li>Die Inhalte des ,Allgemeinen Gleichbehandiungsgesetzes (AGG) sind mir bekannt. Niemand darf aufgrund
+                seiner Rasse und ethnischer Herkunft, Religion und Weltanschauung, einer Behinderung, Geschlechts,
+                sexueller Orientierung oder seines Alters diskriminiert, beleidigt oder belastigt werden.</li>
+            <li>Mir ist bekannt , dass ich gem&B § 2a Abs. 1 SchwarzArbG verpflichtet bin, wahrend meiner Tatigkeit fir
+                oben genannte Firma einen Personalausweis, Pass, Passersatz oder Ausweisersatz mitzuftihren habe um
+                diesen auf Verlangen den Zollbehérde vorzulegen.</li>
+        </ul>
+        <b>Die oben aufgefiihrte Sicherheitsbelehrung habe ich verstanden und zur Kenntnis
+            genommen.</b>
+        <div class="flex gap-6 pt-3">
+            <div class="flex gap-3">
+                <p>Datum:</p>
+                <p>{{date}}</p>
+            </div>
+            <div class="flex gap-3">
+                <p>Unterschrift:</p>
+                <img src="{{signature}}" alt="Signature" style="width: 200px; height: 100px;" />
+            </div>
+        </div>
+    </section>`,
+  },
+  // Добави още секции, ако е необходимо
+];
