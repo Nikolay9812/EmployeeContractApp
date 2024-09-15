@@ -7,35 +7,46 @@ export const contractTemplate = `
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contract</title>
     <style>
-      body {
-        line-height: 1.6;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-      }
-      li {
-        margin-bottom: 10px;
-      }
-      .photo {
-        max-width: 100%;
-        max-height: 900px;
-        display: block;
-        margin: 0 auto;
-      }
-      tbody tr:nth-child(odd) {
-        background-color: #97bade;
-      }
-      tbody tr:nth-child(even) {
-        background-color: #e0f2fe;
-      }
-      section {
-        background: white;
-        min-height: 900px;
-        padding: 0 100px;
-        display: block;
-        page-break-after: always;
-      }
+        body {
+            line-height: 1.6;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .photo {
+            max-width: 100%;
+            /* Мащабира изображението спрямо ширината на страницата */
+            max-height: 900px;
+            /* Гарантира, че изображението няма да надвиши страницата по височина */
+            display: block;
+            margin: 0 auto;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #97bade;
+            /* Светлосиво */
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #e0f2fe;
+            /* Светлосиньо */
+        }
+
+        section {
+            background: white;
+            min-height: 900px;
+            /* Избягване на 100vh */
+            display: block;
+            /* Избягване на flexbox */
+            page-break-after: always;
+            /* Гарантиране, че секцията ще се разделя на нова страница */
+        }
     </style>
   </head>
   <body>
@@ -64,12 +75,12 @@ export const contractSections = [
         <p>Hiermit bestätigen wir, dass der Zusteller {{name}} das Fahrer-Training entsprechend der Amazonvorgaben
             erhalten hat.</p>
         <p>Mit freundlichen Grüßen</p>
-        <img src="{{signature}}" alt="Signature" style="width: 200px; height: 100px;" />
+        <img src="{{signature}}" alt="Signature" style="width: 200px; height: 50px;" />
         <div class="flex justify-between">
             <p>Trainingsveranstalter Druckschrift </p>
             <p>Training erhalten</p>
         </div>
-        <img src="{{signature}}" alt="Signature" style="width: 200px; height: 100px;" />
+        <img src="{{signature}}" alt="Signature" style="width: 200px; height: 50px;" />
         <p>Trainingsveranstalter Unterschrift</p>
     </section>
     `,
@@ -149,12 +160,12 @@ export const contractSections = [
             <div class="text-center">
                 <div class="flex">
                     <p>{{date}}</p>
-                    <img src="{{signature}}" alt="Signature" style="width: 200px; height: 100px;" />
+                    <img src="{{signature}}" alt="Signature" style="width: 200px; height: 50px;" />
                 </div>
                 <p>Datum, Unterschrift Mitarbeiter</p>
             </div>
             <div class="text-center">
-                <img src="{{signature}}" alt="Signature" style="width: 200px; height: 100px;" />
+                <img src="{{signature}}" alt="Signature" style="width: 200px; height: 50px;" />
                 <p>Name in Druckschrift</p>
             </div>
         </div>
@@ -259,7 +270,7 @@ export const contractSections = [
                 <p>DSP Name und Firma: Zhivko Ivanov Kleintransporte </p>
             </div>
             <div class="flex">
-                <p>Unterschrift</p> <img src="{{signature}}" alt="Signature" style="width: 200px; height: 100px;" />
+                <p>Unterschrift</p> <img src="{{signature}}" alt="Signature" style="width: 200px; height: 50px;" />
             </div>
         </div>
     </section>
@@ -806,7 +817,7 @@ export const contractSections = [
                 <p>{{name}}</p>
             </div>
             <div class="flex gap-6 my-[20px]">
-                <p>Unterschrift:</p><img src="{{signature}}" alt="Signature" style="width: 200px; height: 100px;" />
+                <p>Unterschrift:</p><img src="{{signature}}" alt="Signature" style="width: 200px; height: 50px;" />
             </div>
             <div class="flex gap-6">
                 <p>Datum:</p>
@@ -878,12 +889,12 @@ export const contractSections = [
             <div class="text-center">
                 <div class="flex">
                     <p>{{date}}</p>
-                    <img src="{{signature}}" alt="Signature" style="width: 200px; height: 100px;" />
+                    <img src="{{signature}}" alt="Signature" style="width: 200px; height: 50px;" />
                 </div>
                 <p>Datum, Unterschrift Mitarbeiter</p>
             </div>
             <div class="text-center">
-                <img src="{{signature}}" alt="Signature" style="width: 200px; height: 100px;" />
+                <img src="{{signature}}" alt="Signature" style="width: 200px; height: 50px;" />
                 <p>Name in Druckschrift</p>
             </div>
         </div>
@@ -955,7 +966,7 @@ export const contractSections = [
             </div>
             <div class="flex gap-6">
                 <p>Unterschrift</p>
-                <img src="{{signature}}" alt="Signature" style="width: 200px; height: 100px;" />
+                <img src="{{signature}}" alt="Signature" style="width: 200px; height: 50px;" />
             </div>
             <div class="flex gap-6">
                 <p>Name (Druckschrift)</p>
@@ -1016,7 +1027,7 @@ export const contractSections = [
             </div>
             <div class="flex gap-6">
                 <p>Unterschrift</p>
-                <img src="{{signature}}" alt="Signature" style="width: 200px; height: 100px;" />
+                <img src="{{signature}}" alt="Signature" style="width: 200px; height: 50px;" />
             </div>
             <div class="flex gap-6">
                 <p>Datum, Ort</p>
@@ -1064,7 +1075,7 @@ export const contractSections = [
         </div>
         <div class="flex gap-6">
             <p>Unterschrift</p>
-            <img src="{{signature}}" alt="Signature" style="width: 200px; height: 100px;" />
+            <img src="{{signature}}" alt="Signature" style="width: 200px; height: 50px;" />
         </div>
         <div class="flex gap-6">
             <p>Datum, Ort</p>
@@ -1150,7 +1161,7 @@ export const contractSections = [
             </div>
             <div class="flex gap-3">
                 <p>Unterschrift:</p>
-                <img src="{{signature}}" alt="Signature" style="width: 200px; height: 100px;" />
+                <img src="{{signature}}" alt="Signature" style="width: 200px; height: 50px;" />
             </div>
         </div>
     </section>`,

@@ -3,13 +3,22 @@ import { View, Text, Button, Image, Alert } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import * as Print from "expo-print";
 import * as Sharing from "expo-sharing";
-import { contractSections } from './Contract';  // Импортиране на секции
+import { contractSections } from "./Contract";
+import { contractTemplate } from "./Contract"; // Импортиране на шаблона
 
 import { StepThreeRouteProp } from "./types";
+import { ScrollView } from "react-native-gesture-handler";
 
 // Функция за почистване на името на файла от специални символи
 const sanitizeFileName = (name: string) => {
   return name.replace(/[^a-zA-Z0-9]/g, "_");
+};
+
+// Функция за създаване на HTML съдържание от шаблона и секцията
+const generateHtmlContent = (sectionTitle: string, sectionContent: string) => {
+  const filledTemplate = contractTemplate
+    .replace('{{sections}}', `<section><h1>${sectionTitle}</h1>${sectionContent}</section>`);
+  return filledTemplate;
 };
 
 const StepThree = () => {
@@ -17,8 +26,8 @@ const StepThree = () => {
   const { name, date, address, signature } = route.params;
 
   // Замяна на плейсхолдърите в HTML шаблона
-  const replacePlaceholders = (template: string) => {
-    return template
+  const replacePlaceholders = (content: string) => {
+    return content
       .replace(/{{name}}/g, name)
       .replace(/{{date}}/g, date)
       .replace(/{{address}}/g, address)
@@ -29,10 +38,15 @@ const StepThree = () => {
   const createPDFForSection = async (sectionIndex: number) => {
     try {
       const section = contractSections[sectionIndex];
-      const filledHtml = replacePlaceholders(section.content);
+      const filledContent = replacePlaceholders(section.content);
+      const htmlContent = generateHtmlContent(section.title, filledContent);
 
       // Генериране на PDF файл
-      const { uri } = await Print.printToFileAsync({ html: filledHtml });
+      const { uri } = await Print.printToFileAsync({
+        html: htmlContent,
+        base64: false,
+        height:1200,
+      });
 
       const fileName = `contract_${sanitizeFileName(name)}_${sectionIndex + 1}.pdf`;
 
@@ -71,14 +85,16 @@ const StepThree = () => {
         <Text>No signature available</Text>
       )}
 
-      {contractSections.map((section, index) => (
-        <Button
-          key={index}
-          title={`Generate PDF for ${section.title}`}
-          onPress={() => createPDFForSection(index)}
-          color="#4CAF50"
-        />
-      ))}
+      <ScrollView style={{ padding: 20 }}>
+        {contractSections.map((section, index) => (
+          <Button
+            key={index}
+            title={`Generate PDF for ${section.title}`}
+            onPress={() => createPDFForSection(index)}
+            color="#4CAF50"
+          />
+        ))}
+      </ScrollView>
     </View>
   );
 };
