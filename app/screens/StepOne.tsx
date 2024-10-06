@@ -1,63 +1,134 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
+import { View, Text, TextInput, Button, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import * as DocumentPicker from 'expo-document-picker';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-// Дефинирай типовете за навигацията
+// Типове за навигацията
 type RootStackParamList = {
   StepOne: undefined;
-  StepTwo: { name: string; date: string; address: string };
-  StepThree: { name: string; date: string; address: string; signature: string | null };
+  StepTwo: { 
+    gender: string; 
+    owner: string; 
+    name: string; 
+    birthDate: string; 
+    date: string; 
+    address: string; 
+    pdfUri: string | null; 
+  };
 };
 
+// Навигационен проп за StepOne
 type StepOneNavigationProp = StackNavigationProp<RootStackParamList, 'StepOne'>;
 
 const StepOne = () => {
-  const [name, setName] = useState('');
-  const [date, setDate] = useState('');
-  const [address, setAddress] = useState('');
   const navigation = useNavigation<StepOneNavigationProp>();
 
+  // Структурирано състояние за всички полета
+  const [formData, setFormData] = useState({
+    owner: 'Zhivko Ivanov',
+    gender: '',
+    name: '',
+    birthDate: '',
+    date: '',
+    address: '',
+    pdfUri: null as string | null,
+  });
+
+  // Обработка на въвеждането на текст
+  const handleInputChange = (field: string, value: string) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [field]: value,
+    }));
+  };
+
+  // Функция за избор на PDF документ
+  const pickDocument = async () => {
+    try {
+      const result = await DocumentPicker.getDocumentAsync({
+        type: 'application/pdf',
+        copyToCacheDirectory: true,
+      });
+
+      if (!result.canceled && result.assets && result.assets.length > 0) {
+        const file = result.assets[0];
+        setFormData((prevData) => ({
+          ...prevData,
+          pdfUri: file.uri,
+        }));
+        Alert.alert('Document Selected', `PDF file: ${file.name}`);
+      } else {
+        Alert.alert('Document not selected');
+      }
+    } catch (error) {
+      console.error('Error picking document:', error);
+      Alert.alert('Error', 'Failed to pick document');
+    }
+  };
+
+  // Функция за проверка и навигация към StepTwo
   const handleNext = () => {
-    if (name && date && address) {
-      // Навигирай към StepTwo с предаване на параметрите name, date и address
-      navigation.navigate('StepTwo', { name, date, address });
+    const { gender, name, date, address, birthDate, pdfUri } = formData;
+
+    if (name && date && address && gender && birthDate) {
+      navigation.navigate('StepTwo', {
+        gender,
+        owner: formData.owner,
+        name,
+        birthDate,
+        date,
+        address,
+        pdfUri,
+      });
     } else {
-      alert('Please fill out name, date, and address');
+      Alert.alert('Error', 'Please fill out all required fields.');
     }
   };
 
   return (
-    <View className="flex-1 p-4 bg-white">
-      <Text className="text-xl font-bold mb-4">Enter Employee Name</Text>
+    <View style={{ padding: 20 }}>
+      <Text style={{ fontSize: 24, marginBottom: 10 }}>Owner: {formData.owner}</Text>
+
       <TextInput
-        className="border border-gray-300 rounded-md p-4 mb-4 text-lg"
-        placeholder="Name"
-        value={name}
-        onChangeText={setName}
+        style={{ borderWidth: 1, padding: 8, marginBottom: 10 }}
+        placeholder="Employee Name"
+        value={formData.name}
+        onChangeText={(value) => handleInputChange('name', value)}
       />
 
-      <Text className="text-xl font-bold mb-4">Enter Date</Text>
       <TextInput
-        className="border border-gray-300 rounded-md p-4 mb-4 text-lg"
+        style={{ borderWidth: 1, padding: 8, marginBottom: 10 }}
+        placeholder="Employee Gender"
+        value={formData.gender}
+        onChangeText={(value) => handleInputChange('gender', value)}
+      />
+
+      <TextInput
+        style={{ borderWidth: 1, padding: 8, marginBottom: 10 }}
+        placeholder="Employee Birth Date"
+        value={formData.birthDate}
+        onChangeText={(value) => handleInputChange('birthDate', value)}
+      />
+
+      <TextInput
+        style={{ borderWidth: 1, padding: 8, marginBottom: 10 }}
         placeholder="Date"
-        value={date}
-        onChangeText={setDate}
+        value={formData.date}
+        onChangeText={(value) => handleInputChange('date', value)}
       />
 
-      <Text className="text-xl font-bold mb-4">Enter Address</Text>
       <TextInput
-        className="border border-gray-300 rounded-md p-4 mb-4 text-lg"
+        style={{ borderWidth: 1, padding: 8, marginBottom: 10 }}
         placeholder="Address"
-        value={address}
-        onChangeText={setAddress}
+        value={formData.address}
+        onChangeText={(value) => handleInputChange('address', value)}
       />
 
-      <Button
-        title="Next"
-        onPress={handleNext}
-        color="#4CAF50" // Зелен бутон
-      />
+      <Button title="Pick PDF Document" onPress={pickDocument} />
+      {formData.pdfUri && <Text style={{ marginVertical: 10 }}>PDF selected: {formData.pdfUri}</Text>}
+
+      <Button title="Next" onPress={handleNext} color="#4CAF50" />
     </View>
   );
 };

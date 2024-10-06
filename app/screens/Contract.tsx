@@ -8,11 +8,14 @@ export const contractTemplate = `
     <title>Contract</title>
     <style>
         body {
-            line-height: 1.6;
-            padding: 20px;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            font-size: 14px;
+            margin: 0 50px;
+        }
+
+        section {
+            page-break-after: always;
         }
 
         li {
@@ -38,15 +41,6 @@ export const contractTemplate = `
             /* Светлосиньо */
         }
 
-        section {
-            background: white;
-            min-height: 900px;
-            /* Избягване на 100vh */
-            display: block;
-            /* Избягване на flexbox */
-            page-break-after: always;
-            /* Гарантиране, че секцията ще се разделя на нова страница */
-        }
     </style>
   </head>
   <body>
@@ -811,19 +805,29 @@ export const contractSections = [
             <p>Ich bestätige den Erhalt dieser AMZL Privacy Notice für Lieferpartner</p>
         </div>
 
-        <div>
-            <div class="flex gap-6">
-                <p>Name:</p>
-                <p>{{name}}</p>
-            </div>
-            <div class="flex gap-6 my-[20px]">
-                <p>Unterschrift:</p><img src="{{signature}}" alt="Signature" style="width: 200px; height: 50px;" />
-            </div>
-            <div class="flex gap-6">
-                <p>Datum:</p>
-                <p>{{date}}</p>
-            </div>
+<div>
+    <div style="display: flex; justify-content: left; align-items: center; margin-bottom: 20px; gap: 50px;">
+        <p style="margin: 0;">Name:</p>
+        <div style="border-bottom: 1px solid black; width: 200px; text-align: center;">
+            <p style="margin: 0;">{{name}}</p>
         </div>
+    </div>
+
+    <div style="display: flex; justify-content: left; align-items: center; margin-bottom: 20px; gap: 50px;">
+        <p style="margin: 0;">Unterschrift:</p>
+        <div style="border-bottom: 1px solid black; width: 200px; height: 50px; text-align: right;">
+            <img src="{{signature}}" alt="Signature" style="width: 200px; height: 50px;" />
+        </div>
+    </div>
+
+    <div style="display: flex; justify-content: left; align-items: center; margin-bottom: 20px; gap: 50px;">
+        <p style="margin: 0;">Datum:</p>
+        <div style="border-bottom: 1px solid black; width: 200px; text-align: center;">
+            <p style="margin: 0;">{{date}}</p>
+        </div>
+    </div>
+</div>
+
 
     </section>`,
   },

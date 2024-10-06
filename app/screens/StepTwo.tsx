@@ -1,81 +1,50 @@
-import React from "react";
-import { View, Button, Text } from "react-native";
-import Signature from "react-native-signature-canvas";
-import { useNavigation, useRoute } from "@react-navigation/native";
-
-import { StepTwoNavigationProp, StepTwoRouteProp } from "./types"; // Импортирай типовете
+import React from 'react';
+import { View, Button, Text } from 'react-native';
+import Signature from 'react-native-signature-canvas';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { StepTwoNavigationProp, StepTwoRouteProp } from './types';
 
 const StepTwo = () => {
   const navigation = useNavigation<StepTwoNavigationProp>();
   const route = useRoute<StepTwoRouteProp>();
-
-  const [signature, setSignature] = React.useState<string | null>(null);
+  const [employeeSignature, setEmployeeSignature] = React.useState<string | null>(null);
 
   const handleOK = (sig: string) => {
-    setSignature(sig);
+    setEmployeeSignature(sig);
   };
 
   const handleNext = () => {
-    // Навигирай към StepThree с параметрите name, date, address и signature
-    navigation.navigate("StepThree", {
+    navigation.navigate('StepThree', {
+      gender: route.params.gender,
+      owner: route.params.owner,
       name: route.params.name,
+      birthDate: route.params.birthDate,
       date: route.params.date,
-      address: route.params.address, // Добавяме и адреса
-      signature,
+      address: route.params.address,
+      employeeSignature: employeeSignature, // Запазва подписа на служителя
+      pdfUri: route.params.pdfUri, 
     });
   };
 
   return (
     <View style={{ flex: 1, backgroundColor: 'white' }}>
-      <Text style={{ fontSize: 24, fontWeight: 'bold', textAlign: 'center', padding: 16 }}>Sign Below</Text>
-  
+      <Text style={{ fontSize: 24, fontWeight: 'bold', textAlign: 'center', padding: 16 }}>Подпиши се по-долу</Text>
       <View style={{ flex: 1 }}>
         <Signature
           onOK={handleOK}
-          descriptionText="Sign here"
-          clearText="Clear"
-          confirmText="Save"
-          webStyle={`
-            .m-signature-pad {
-              box-shadow: none;
-              border: none;
-              margin: 0;
-              width: 100%;  /* Използва цялата ширина на екрана */
-              height: 100%; /* Задава височината да бъде на цял екран */
-            }
-            .m-signature-pad--body {
-              border: none;
-              margin: 0;
-              width: 100%;
-              height: 100%;  /* Височина на платното */
-            }
-            .m-signature-pad--footer {
-              display: flex;
-              justify-content: space-between;
-              padding: 10px;
-            }
-            .button {
-              background-color: #4CAF50;
-              color: white;
-              border: none;
-              padding: 10px 20px;
-              font-size: 16px;
-              border-radius: 5px;
-            }
-          `}
-          style={{ flex: 1, borderWidth: 1, borderColor: '#ccc' }}  // Подписът ще се разпъне вертикално
+          descriptionText="Подпис тук"
+          clearText="Изчисти"
+          confirmText="Запази"
+          webStyle={''}
+          style={{ flex: 1, borderWidth: 1, borderColor: '#ccc' }}
         />
       </View>
-  
       <View style={{ padding: 16 }}>
-        <Button
-          title="Next"
-          onPress={handleNext}
-          color="#4CAF50"
-        />
+        <Button title="Напред" onPress={handleNext} color="#4CAF50" />
       </View>
     </View>
   );
 };
+
 
 export default StepTwo;
