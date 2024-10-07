@@ -11,11 +11,17 @@ interface FieldCoordinates {
   owner?: { x: number; y: number };
   name?: { x: number; y: number };
   date?: { x: number; y: number };
+  dateDay?: { x: number; y: number };
+  dateMonth?: { x: number; y: number };
+  dateYear?: { x: number; y: number };
   birthDate?: { x: number; y: number };
   gender?: { x: number; y: number };
-  address?: { x: number; y: number };
   employeeSignature?: { x: number; y: number }; // Подпис на служителя
   ownerSignature?: { x: number; y: number }; // Подпис на собственика
+  address?: { x: number; y: number };
+  addressStreet?: { x: number; y: number }; // Улица
+  addressPostalCode?: { x: number; y: number }; // Пощенски код
+  addressCity?: { x: number; y: number }; // Град
   x1?: { x: number; y: number }; // Подпис на собственика
   x2?: { x: number; y: number }; // Подпис на собственика
   x3?: { x: number; y: number }; // Подпис на собственика
@@ -23,6 +29,11 @@ interface FieldCoordinates {
   x5?: { x: number; y: number }; // Подпис на собственика
   stampText?: { x: number; y: number }; // Подпис на собственика
   trialDate?: { x: number; y: number }; // Подпис на собственика
+  birthDay?: { x: number; y: number }; // Подпис на собственика
+  birthMonth?: { x: number; y: number }; // Подпис на собственика
+  birthYear?: { x: number; y: number }; // Подпис на собственика
+  dateDayMonthFirst?: { x: number; y: number }; // Подпис на собственика
+  dateDayMonthSecond?: { x: number; y: number }; // Подпис на собственика
 }
 
 type CoordinatesMap = {
@@ -43,6 +54,13 @@ const StepFour = () => {
     ownerSignature,
     pdfUri,
   } = route.params;
+
+  const [dateDay, dateMonth, dateYear] = date.split(".");
+  const [birthDay, birthMonth, birthYear] = birthDate.split(".");
+  const [addressStreet, addressPostalCode, addressCity] = address.split(",");
+
+  const dateDayMonthFirst = `${dateDay}.${dateMonth}.`;
+  const dateDayMonthSecond = `${dateDay}.${dateMonth}.`;
 
   const x1 = "X";
   const x2 = "X";
@@ -74,7 +92,7 @@ const StepFour = () => {
         },
         8: {
           date: { x: 145, y: 130 },
-          address: { x: 220, y: 130 },
+          addressCity: { x: 220, y: 130 },
           employeeSignature: { x: 150, y: 70 },
           name: { x: 145, y: 85 },
           x1: { x: 42, y: 247 }, 
@@ -84,14 +102,14 @@ const StepFour = () => {
           x5: { x: 42, y: 160 }, 
         },
         9: {
-          date: { x: 320, y: 275 },
-          address: { x: 110, y: 275 },
+          date: { x: 190, y: 275 },
+          addressCity: { x: 110, y: 275 },
           employeeSignature: { x: 110, y: 260 },
           name: { x: 110, y: 320 },
         },
         10: {
-          date: { x: 320, y: 427 },
-          address: { x: 110, y: 427 },
+          date: { x: 190, y: 427 },
+          addressCity: { x: 110, y: 427 },
           employeeSignature: { x: 110, y: 410 },
           name: { x: 110, y: 470 },
         },
@@ -108,8 +126,12 @@ const StepFour = () => {
         13: {
           gender: { x: 72, y: 682 },
           name: { x: 72, y: 668 },
-          address: { x: 72, y: 654 },
+          addressStreet: { x: 72, y: 654 },
+          addressCity: { x: 69, y: 640 },
+          addressPostalCode: { x: 128, y: 640 },
           birthDate: { x: 445, y: 668 },
+          dateDayMonthFirst: { x: 242, y: 310 },
+          dateDayMonthSecond: { x: 377, y: 310 },
         },
         18: {
           date: { x: 160, y: 380 },
@@ -133,9 +155,13 @@ const StepFour = () => {
           employeeSignature: { x: 150, y: 550 },
         },
         24: {
-          date: { x: 380, y: 645 },
+          dateDay: { x: 380, y: 645 },
+          dateMonth: { x: 405, y: 645 },
+          dateYear: { x: 430, y: 645 },
           name: { x: 170, y: 443 },
-          birthDate: { x: 340, y: 442 },
+          birthDay: { x: 330, y: 442 },
+          birthMonth: { x: 355, y: 442 },
+          birthYear: { x: 380, y: 442 },
           address: { x: 70, y: 406 },
           employeeSignature: { x: 180, y: 70 },
         },
@@ -158,9 +184,11 @@ const StepFour = () => {
           employeeSignature: { x: 380, y: 60 },
         },
         30: {
-          date: { x: 440, y: 655 },
+          dateDay: { x: 435, y: 655 },
+          dateMonth: { x: 457, y: 655 },
+          dateYear: { x: 480, y: 655 },
           name: { x: 280, y: 430 },
-          owner: { x: 90, y: 250 },
+          owner: { x: 90, y: 247 },
           ownerSignature: { x: 90, y: 140 },
           employeeSignature: { x: 380, y: 140 },
         },
@@ -179,7 +207,79 @@ const StepFour = () => {
               x: coords.trialDate.x,
               y: coords.trialDate.y,
               size: 12, 
-              color: rgb(0, 0, 1),
+              color: rgb(0, 0, 0),
+            });
+          }
+
+          if (coords.dateDayMonthFirst) {
+            page.drawText(dateDayMonthFirst, {
+              x: coords.dateDayMonthFirst.x,
+              y: coords.dateDayMonthFirst.y,
+              size: 12,
+              color: rgb(0, 0, 0),
+            });
+          }
+
+          if (coords.dateDayMonthSecond) {
+            page.drawText(dateDayMonthSecond, {
+              x: coords.dateDayMonthSecond.x,
+              y: coords.dateDayMonthSecond.y,
+              size: 12,
+              color: rgb(0, 0, 0),
+            });
+          }
+
+          if (coords.dateDay) {
+            page.drawText(dateDay, {
+              x: coords.dateDay.x,
+              y: coords.dateDay.y,
+              size: 12,
+              color: rgb(0, 0, 0),
+            });
+          }
+
+          if (coords.dateMonth) {
+            page.drawText(dateMonth, {
+              x: coords.dateMonth.x,
+              y: coords.dateMonth.y,
+              size: 12,
+              color: rgb(0, 0, 0),
+            });
+          }
+
+          if (coords.dateYear) {
+            page.drawText(dateYear, {
+              x: coords.dateYear.x,
+              y: coords.dateYear.y,
+              size: 12,
+              color: rgb(0, 0, 0),
+            });
+          }
+
+          if (coords.birthDay) {
+            page.drawText(birthDay, {
+              x: coords.birthDay.x,
+              y: coords.birthDay.y,
+              size: 12,
+              color: rgb(0, 0, 0),
+            });
+          }
+
+          if (coords.birthMonth) {
+            page.drawText(birthMonth, {
+              x: coords.birthMonth.x,
+              y: coords.birthMonth.y,
+              size: 12,
+              color: rgb(0, 0, 0),
+            });
+          }
+
+          if (coords.birthYear) {
+            page.drawText(birthYear, {
+              x: coords.birthYear.x,
+              y: coords.birthYear.y,
+              size: 12,
+              color: rgb(0, 0, 0),
             });
           }
 
@@ -198,7 +298,7 @@ const StepFour = () => {
               x: coords.x1.x,
               y: coords.x1.y,
               size: 12,
-              color: rgb(0, 0, 1),
+              color: rgb(0, 0, 0),
             });
           }
   
@@ -207,7 +307,7 @@ const StepFour = () => {
               x: coords.x2.x,
               y: coords.x2.y,
               size: 12,
-              color: rgb(0, 0, 1),
+              color: rgb(0, 0, 0),
             });
           }
   
@@ -216,7 +316,7 @@ const StepFour = () => {
               x: coords.x3.x,
               y: coords.x3.y,
               size: 12,
-              color: rgb(0, 0, 1),
+              color: rgb(0, 0, 0),
             });
           }
   
@@ -225,7 +325,7 @@ const StepFour = () => {
               x: coords.x4.x,
               y: coords.x4.y,
               size: 12,
-              color: rgb(0, 0, 1),
+              color: rgb(0, 0, 0),
             });
           }
   
@@ -234,7 +334,36 @@ const StepFour = () => {
               x: coords.x5.x,
               y: coords.x5.y,
               size: 12,
-              color: rgb(0, 0, 1),
+              color: rgb(0, 0, 0),
+            });
+          }
+
+          if (coords.addressStreet) {
+            page.drawText(addressStreet || "", {
+              x: coords.addressStreet.x,
+              y: coords.addressStreet.y,
+              size: 12,
+              color: rgb(0, 0, 0),
+            });
+          }
+
+          // Добавяне на пощенския код
+          if (coords.addressPostalCode) {
+            page.drawText(addressPostalCode || "", {
+              x: coords.addressPostalCode.x,
+              y: coords.addressPostalCode.y,
+              size: 12,
+              color: rgb(0, 0, 0),
+            });
+          }
+
+          // Добавяне на града
+          if (coords.addressCity) {
+            page.drawText(addressCity || "", {
+              x: coords.addressCity.x,
+              y: coords.addressCity.y,
+              size: 12,
+              color: rgb(0, 0, 0),
             });
           }
 
@@ -244,7 +373,7 @@ const StepFour = () => {
               x: coords.name.x,
               y: coords.name.y,
               size: 12,
-              color: rgb(0, 0, 1),
+              color: rgb(0, 0, 0),
             });
           }
 
@@ -254,7 +383,7 @@ const StepFour = () => {
               x: coords.gender.x,
               y: coords.gender.y,
               size: 12,
-              color: rgb(0, 0, 1),
+              color: rgb(0, 0, 0),
             });
           }
 
@@ -264,7 +393,7 @@ const StepFour = () => {
               x: coords.owner.x,
               y: coords.owner.y,
               size: 12,
-              color: rgb(0, 0, 1),
+              color: rgb(0, 0, 0),
             });
           }
 
@@ -274,7 +403,7 @@ const StepFour = () => {
               x: coords.date.x,
               y: coords.date.y,
               size: 12,
-              color: rgb(0, 0, 1),
+              color: rgb(0, 0, 0),
             });
           }
 
@@ -284,7 +413,7 @@ const StepFour = () => {
               x: coords.birthDate.x,
               y: coords.birthDate.y,
               size: 12,
-              color: rgb(0, 0, 1),
+              color: rgb(0, 0, 0),
             });
           }
 
@@ -294,7 +423,7 @@ const StepFour = () => {
               x: coords.address.x,
               y: coords.address.y,
               size: 12,
-              color: rgb(0, 0, 1),
+              color: rgb(0, 0, 0),
             });
           }
 
