@@ -20,6 +20,7 @@ const StepThree = () => {
       name: route.params.name,
       birthDate: route.params.birthDate,
       date: route.params.date,
+      trialDate: route.params.trialDate,
       address: route.params.address,
       employeeSignature: route.params.employeeSignature, // Подписът на служителя
       ownerSignature: ownerSignature, // Подписът на собственика
@@ -37,6 +38,7 @@ const StepThree = () => {
           clearText="Изчисти"
           confirmText="Запази"
           webStyle={''}
+          penColor='rgb(0, 0, 255)'
           style={{ flex: 1, borderWidth: 1, borderColor: '#ccc' }}
         />
       </View>

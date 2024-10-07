@@ -12,6 +12,7 @@ type RootStackParamList = {
     owner: string; 
     name: string; 
     birthDate: string; 
+    trialDate: string; 
     date: string; 
     address: string; 
     pdfUri: string | null; 
@@ -31,6 +32,7 @@ const StepOne = () => {
     name: '',
     birthDate: '',
     date: '',
+    trialDate: '',
     address: '',
     pdfUri: null as string | null,
   });
@@ -69,7 +71,7 @@ const StepOne = () => {
 
   // Функция за проверка и навигация към StepTwo
   const handleNext = () => {
-    const { gender, name, date, address, birthDate, pdfUri } = formData;
+    const { gender, name, date, trialDate, address, birthDate, pdfUri } = formData;
 
     if (name && date && address && gender && birthDate) {
       navigation.navigate('StepTwo', {
@@ -78,6 +80,7 @@ const StepOne = () => {
         name,
         birthDate,
         date,
+        trialDate,
         address,
         pdfUri,
       });
@@ -116,6 +119,13 @@ const StepOne = () => {
         placeholder="Date"
         value={formData.date}
         onChangeText={(value) => handleInputChange('date', value)}
+      />
+
+      <TextInput
+        style={{ borderWidth: 1, padding: 8, marginBottom: 10 }}
+        placeholder="Trial Date"
+        value={formData.trialDate}
+        onChangeText={(value) => handleInputChange('trialDate', value)}
       />
 
       <TextInput

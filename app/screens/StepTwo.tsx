@@ -19,6 +19,7 @@ const StepTwo = () => {
       owner: route.params.owner,
       name: route.params.name,
       birthDate: route.params.birthDate,
+      trialDate: route.params.trialDate,
       date: route.params.date,
       address: route.params.address,
       employeeSignature: employeeSignature, // Запазва подписа на служителя
@@ -36,6 +37,7 @@ const StepTwo = () => {
           clearText="Изчисти"
           confirmText="Запази"
           webStyle={''}
+          penColor='rgb(0, 0, 255)'
           style={{ flex: 1, borderWidth: 1, borderColor: '#ccc' }}
         />
       </View>

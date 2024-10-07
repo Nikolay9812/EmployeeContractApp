@@ -9,6 +9,7 @@ type RootStackParamList = {
     owner: string; 
     name: string; 
     birthDate: string; 
+    trialDate: string; 
     date: string; 
     address: string; 
     employeeSignature: string | null; 
@@ -18,7 +19,8 @@ type RootStackParamList = {
     gender: string; 
     owner: string; 
     name: string; 
-    birthDate: string; 
+    birthDate: string;  
+    trialDate: string; 
     date: string; 
     address: string; 
     employeeSignature: string | null; 
@@ -29,6 +31,7 @@ type RootStackParamList = {
     owner: string; 
     name: string; 
     birthDate: string; 
+    trialDate: string;  
     date: string; 
     address: string; 
     employeeSignature: string | null; 
